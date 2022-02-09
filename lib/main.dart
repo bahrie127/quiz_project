@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_project/quiz_screen.dart';
+import 'package:quiz_project/result_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -43,6 +44,12 @@ class _MyAppState extends State<MyApp> {
 
   var _questionIndex = 0;
 
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex += 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,10 +60,13 @@ class _MyAppState extends State<MyApp> {
             style: TextStyle(color: Color.fromARGB(255, 236, 238, 213)),
           ),
         ),
-        body: QuizScreen(
-          questions: _questions,
-          questionIndex: _questionIndex,
-        ),
+        body: _questionIndex < _questions.length
+            ? QuizScreen(
+                questions: _questions,
+                questionIndex: _questionIndex,
+                answerQuestion: _answerQuestion,
+              )
+            : ResultScreen(),
       ),
     );
   }

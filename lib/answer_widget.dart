@@ -4,8 +4,10 @@ class AnswerWidget extends StatelessWidget {
   const AnswerWidget({
     Key? key,
     required this.answerText,
+    required this.selectHandler,
   }) : super(key: key);
   final String answerText;
+  final VoidCallback selectHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,7 @@ class AnswerWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ElevatedButton(
         child: Text(answerText),
-        onPressed: () {
-          print(answerText);
-        },
+        onPressed: selectHandler,
       ),
     );
   }
